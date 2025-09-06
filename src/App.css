@@ -1,38 +1,112 @@
-.App {
-  text-align: center;
+.coin{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  background-image: linear-gradient(to right,#ffffff 0%,#fc3939 75%,#ffffff 100%);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#root{
+width: 100vw;
+height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.coinflip-app{
   display: flex;
+  justify-content: space-around;
+  align-items: center;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.coin-face{
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border-radius: 50%;
+  position: absolute;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+
+.front{
+  background-color: gold;
+  box-shadow: 0 0 0 5px #aaa inset;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.back{
+  background-color: silver;
+  box-shadow: 0 0 0 5px #888 inset;
+  transform: rotateY(180deg);
+}
+
+.coin.flipping {
+  animation: flip 2.5s ease-out forwards;
+}
+
+.coin.heads{
+  transform: rotateY(0deg);
+}
+
+.coin.tails{
+  transform: rotateY(180deg);
+}
+
+.coin.flipping.heads {
+  animation: flip-heads 2.4s ease-out forwards;
+}
+
+.coin.flipping.tails {
+  animation: flip-tails 2.4s ease-out forwards;
+}
+
+.content{
+  border: 1px solid black;
+  width: 80%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+/* @keyframes flip {
+  0% { transform: scale(1) rotateX(0deg); }
+  50% { transform: scale(1.5) rotateX(1800deg); }
+  100% { transform: scale(1) rotateX(3600deg); }
+} */
+
+@keyframes flip-heads {
+  0% {
+    transform: scale(1) rotateY(0deg);
   }
-  to {
-    transform: rotate(360deg);
+  60% {
+    transform: scale(1.5) rotateY(1800deg); /* 5 vueltas mientras sube */
+  }
+  85% {
+    transform: scale(1.3) rotateY(1980deg); /* solo 0.5 vueltas más */
+  }
+  100% {
+    transform: scale(1) rotateY(1980deg);   /* termina suave en Heads */
+  }
+}
+
+/* Animación hacia Tails */
+@keyframes flip-tails {
+  0% {
+    transform: scale(1) rotateY(0deg);
+  }
+  60% {
+    transform: scale(1.5) rotateY(1800deg); /* 5 vueltas mientras sube */
+  }
+  85% {
+    transform: scale(1.3) rotateY(1980deg); /* solo 0.5 vueltas más */
+  }
+  100% {
+    transform: scale(1) rotateY(1980deg);   /* termina suave en Heads */
   }
 }
